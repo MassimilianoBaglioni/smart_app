@@ -1,0 +1,38 @@
+version: '3'
+services:
+  backend:
+    build: ./backend
+    container_name: node-backend
+    networks:
+      - api_network
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./frontend
+    container_name: simple-frontend
+    networks:
+      - api_network
+    ports:
+      - "80:80"
+  
+  mongodb:
+    image : mongo
+    container_name: mongodb
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./mongo/data/db:/data/db
+    networks:
+        - api_network
+    ports:
+      - 27017:27017
+    restart: unless-stopped
+
+networks:
+  api_network:
+    driver: bridge
+
