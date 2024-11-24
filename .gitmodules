@@ -3,4 +3,4 @@
 	url = https://github.com/Kreative-Performative-Individuals/smart-industrial-database.git
 [submodule "kpi-engine"]
 	path = kpi-engine
-	url = https://github.com/Kreative-Performative-Individuals/KPI-Engine.git
+	url = git@github.com:Kreative-Performative-Individuals/KPI-Engine.git
