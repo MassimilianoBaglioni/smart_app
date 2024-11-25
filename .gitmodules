@@ -1,0 +1,15 @@
+[submodule "project_forked/smart-industrial-database"]
+	path = project_forked/smart-industrial-database
+	url = git@github.com:MassimilianoBaglioni/smart-industrial-database.git
+[submodule "project_forked/KPI-Engine"]
+	path = project_forked/KPI-Engine
+	url = git@github.com:MassimilianoBaglioni/KPI-Engine.git
+[submodule "project_forked/KB"]
+	path = project_forked/KB
+	url = git@github.com:MassimilianoBaglioni/KB.git
+[submodule "project_forked/data-preprocessing-"]
+	path = project_forked/data-preprocessing-
+	url = git@github.com:MassimilianoBaglioni/data-preprocessing-.git
+[submodule "project_forked/RAG5"]
+	path = project_forked/RAG5
+	url = git@github.com:MassimilianoBaglioni/RAG5.git
