@@ -7,3 +7,15 @@
 [submodule "knowledge-base"]
 	path = knowledge-base
 	url = git@github.com:Kreative-Performative-Individuals/KB.git
+[submodule "RAG5"]
+	path = RAG5
+	url = git@github.com:MassimilianoBaglioni/RAG5.git
+[submodule "data-preprocessing-"]
+	path = data-preprocessing-
+	url = git@github.com:MassimilianoBaglioni/data-preprocessing-.git
+[submodule "KB"]
+	path = KB
+	url = git@github.com:MassimilianoBaglioni/KB.git
+[submodule "KPI-Engine"]
+	path = KPI-Engine
+	url = git@github.com:MassimilianoBaglioni/KPI-Engine.git
