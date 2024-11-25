@@ -4,3 +4,6 @@
 [submodule "kpi-engine"]
 	path = kpi-engine
 	url = git@github.com:Kreative-Performative-Individuals/KPI-Engine.git
+[submodule "knowledge-base"]
+	path = knowledge-base
+	url = git@github.com:Kreative-Performative-Individuals/KB.git
