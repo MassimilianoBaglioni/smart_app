@@ -28,34 +28,26 @@ services:
       - db
 
   db:
-    build: ./smart-industrial-database/
+    build: ./db 
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
-    volumes:
-      - ./smart-industrial-database/data:/var/lib/postgresql/data
-    networks:
-      - app-network
-    container_name: smart-database-container
-
-  pgadmin:
-    image: dpage/pgadmin4
-    ports:
-      - "5051:80"  
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com  
-      PGADMIN_DEFAULT_PASSWORD: password      
     networks:
       - app-network
 
   kpi-engine:
-    build: ./kpi-engine/
+    build: ./kpi-engine
     ports:
-      - "8004:8000"
+      - "8003:8000" 
     networks:
       - app-network
+    depends_on:
+      - db
 
 networks:
   app-network:
