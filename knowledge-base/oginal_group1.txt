@@ -1,0 +1,54 @@
+# Importazione dei moduli necessari per l'applicazione FastAPI.
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from typing import List, Optional
+import kb_interface as kbi  # Modulo personalizzato per interagire con l'ontologia KB.
+
+app = FastAPI() 
+
+# Gestore degli eventi per l'inizializzazione che viene eseguito all'avvio dell'app.
+@app.on_event("startup")
+async def startup_event():
+    # Chiamata alla funzione di inizializzazione dell'ontologia dal modulo kb_interface.
+    kbi.start()
+
+# Definizione di un modello Pydantic per validare i dati in entrata per l'endpoint add_kpi.
+class KPIModel(BaseModel):
+    superclass: str
+    label: str
+    description: str
+    unit_of_measure: str
+    parsable_computation_formula: str
+    human_readable_formula: Optional[str] = None
+    depends_on_machine: Optional[bool] = False
+    depends_on_operation: Optional[bool] = False
+
+# Endpoint GET per recuperare le formule associate a un determinato KPI.
+@app.get("/get_formulas/{kpi_label}")
+def get_formulas(kpi_label: str):
+    try:
+        # Tenta di recuperare le formule tramite la funzione get_formulas del modulo kb_interface.
+        formulas, kpi_labels, kpi_names = kbi.get_formulas(kpi_label)
+        return {"formulas": formulas, "kpi_labels": kpi_labels, "kpi_names": kpi_names}
+    except Exception as e:
+        # Gestisce le eccezioni sollevando un'eccezione HTTP se qualcosa va storto.
+        raise HTTPException(status_code=404, detail=str(e))
+
+# Endpoint POST per aggiungere un nuovo KPI nell'ontologia.
+@app.post("/add_kpi/")
+def add_kpi(kpi: KPIModel):
+    try:
+        # Aggiunge il KPI usando i dati validati dal modello KPIModel.
+        kbi.add_kpi(kpi.superclass, kpi.label, kpi.description, kpi.unit_of_measure, 
+                    kpi.parsable_computation_formula, kpi.human_readable_formula, 
+                    kpi.depends_on_machine, kpi.depends_on_operation)
+        return {"message": "KPI added successfully"}
+    except Exception as e:
+        # Gestisce le eccezioni sollevando un'eccezione HTTP se qualcosa va storto durante l'aggiunta.
+        raise HTTPException(status_code=400, detail=str(e))
+
+# Endpoint GET per ottenere il percorso del file dell'ultima versione dell'ontologia salvata.
+@app.get("/get_onto_path/")
+def get_onto_path():
+    path = kbi.get_onto_path()  # Richiede il percorso tramite la funzione get_onto_path del modulo kb_interface.
+    return {"ontology_path": str(path)}  # Ritorna il percorso del file come stringa.
