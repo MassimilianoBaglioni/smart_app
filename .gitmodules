@@ -1,3 +1,6 @@
 [submodule "KB"]
 	path = KB
 	url = git@github.com:MassimilianoBaglioni/KB.git
+[submodule "kpi-engine"]
+	path = kpi-engine
+	url = git@github.com:MassimilianoBaglioni/KPI-Engine.git
