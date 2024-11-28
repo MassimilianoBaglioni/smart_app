@@ -1,21 +1,32 @@
 #!/bin/bash
 
-# Make sure you're in the root of your integration repo
-# cd /path/to/integration-repo
+# Ensure the script is being run from the root of your integration repository
+if [ ! -f ".gitmodules" ]; then
+  echo "This script must be run from the root of the integration repository."
+  exit 1
+fi
 
-# Loop through all submodules
-for submodule in $(git submodule foreach 'echo $name'); do
-    echo "Updating submodule $submodule..."
+# Fetch the latest changes from the submodules and update the commit reference in the main repo
+echo "Updating submodules..."
 
-    # Fetch the latest changes for the submodule
-    git submodule update --remote submodules/$submodule
+# Step 1: Initialize and update submodules if not already initialized
+git submodule update --init --recursive
 
-    # Stage the updated submodule reference
-    git add submodules/$submodule
+# Step 2: Fetch the latest changes from the remote for each submodule
+git submodule update --remote --merge
 
-    # Commit the changes (if any)
-    git commit -m "Update submodule $submodule to the latest commit"
+# Step 3: For each submodule, update the reference in the main repo
+# This will update the submodule reference (to the latest commit in the remote repository)
+git submodule foreach 'git fetch origin && git checkout $(git rev-parse --abbrev-ref origin/$(git rev-parse --abbrev-ref HEAD))'
 
-done
+# Step 4: Stage the changes in the main repository (submodule commit updates)
+git add .
 
-git push origin master 
+# Step 5: Commit the changes (updated submodule references)
+git commit -m "Update submodules to the latest commits"
+
+# Step 6: Push the changes to the main repository
+git push origin $(git rev-parse --abbrev-ref HEAD)
+
+echo "Submodules updated and changes pushed to the integration repository."
+
