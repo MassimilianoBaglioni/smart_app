@@ -4,3 +4,6 @@
 [submodule "kpi-engine"]
 	path = kpi-engine
 	url = git@github.com:MassimilianoBaglioni/KPI-Engine.git
+[submodule "RAG5"]
+	path = RAG5
+	url = git@github.com:MassimilianoBaglioni/RAG5.git
