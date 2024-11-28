@@ -10,3 +10,6 @@
 [submodule "data-preprocessing"]
 	path = data-preprocessing
 	url = git@github.com:MassimilianoBaglioni/data-preprocessing-.git
+[submodule "smart-industrial-database"]
+	path = smart-industrial-database
+	url = git@github.com:MassimilianoBaglioni/smart-industrial-database.git
