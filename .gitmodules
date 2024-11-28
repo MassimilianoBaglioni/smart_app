@@ -7,3 +7,6 @@
 [submodule "RAG5"]
 	path = RAG5
 	url = git@github.com:MassimilianoBaglioni/RAG5.git
+[submodule "data-preprocessing"]
+	path = data-preprocessing
+	url = git@github.com:MassimilianoBaglioni/data-preprocessing-.git
