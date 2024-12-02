@@ -1,15 +1,1 @@
-[submodule "KB"]
-	path = KB
-	url = git@github.com:MassimilianoBaglioni/KB.git
-[submodule "kpi-engine"]
-	path = kpi-engine
-	url = git@github.com:MassimilianoBaglioni/KPI-Engine.git
-[submodule "RAG5"]
-	path = RAG5
-	url = git@github.com:MassimilianoBaglioni/RAG5.git
-[submodule "data-preprocessing"]
-	path = data-preprocessing
-	url = git@github.com:MassimilianoBaglioni/data-preprocessing-.git
-[submodule "smart-industrial-database"]
-	path = smart-industrial-database
-	url = git@github.com:MassimilianoBaglioni/smart-industrial-database.git
+
